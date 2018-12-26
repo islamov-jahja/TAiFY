@@ -145,6 +145,12 @@ void ReadStartStateOfAutomat(vector<vector<State>>& startStateOfAutomat, int cou
 	while(!inFile.eof())
 	{
 		getline(inFile, lineWithStates);
+		if (lineWithStates.empty())
+		{
+			i++;
+			continue;
+		}
+
 		string delim(" ");
 		size_t prev = 0;
 		size_t next;
