@@ -247,6 +247,8 @@ bool Compiler::isFloatE(string terminal)
 	int startIndex = 0;
 	if (terminal[0] == '-')
 		startIndex = 1;
+	if (!isdigit(terminal[terminal.size() - 1]))
+		return false;
 
 	if (!isdigit(terminal[startIndex]))
 		return false;

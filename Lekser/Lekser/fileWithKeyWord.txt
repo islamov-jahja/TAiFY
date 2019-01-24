@@ -15,3 +15,7 @@ var 4
 } 7
 function 8
 const 9
+<< 17 
+>> 18
+write 19
+read 19
