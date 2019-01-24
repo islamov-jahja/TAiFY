@@ -120,22 +120,26 @@ int Compiler::getValueOfTerminal(string terminal)
 		return mapWithKey.find(terminal)->second;
 
 	if (isIdentifier(terminal))
-		return 9;
-
-	if (isInteger(terminal))
 		return 10;
 
-	if (isInt2(terminal))
+	if (isInteger(terminal))
 		return 11;
 
-	if (isInt8(terminal))
+	if (isInt2(terminal))
 		return 12;
 
-	if (isInt16(terminal))
+	if (isInt8(terminal))
 		return 13;
 
-	if (isFloat(terminal))
+	if (isInt16(terminal))
 		return 14;
+
+	if (isFloat(terminal))
+		return 15;
+
+	if (isFloatE(terminal))
+		return 16;
+
 	return 0;
 }
 
@@ -209,7 +213,7 @@ bool Compiler::isInt16(string terminal)
 
 bool Compiler::isFloat(string terminal)
 {
-	if (terminal[terminal.size()-1] != 'f')
+	if (terminal[terminal.size() - 1] != 'f')
 		return false;
 
 	int countOfPoints = 0;
@@ -222,7 +226,7 @@ bool Compiler::isFloat(string terminal)
 
 	startIndex++;
 
-	for (int i = startIndex; i < terminal.size()-1; i++)
+	for (int i = startIndex; i < terminal.size() - 1; i++)
 	{
 		if (!isdigit(terminal[i]) && terminal[i] != '.')
 			return false;
@@ -238,8 +242,48 @@ bool Compiler::isFloat(string terminal)
 
 bool Compiler::isFloatE(string terminal)
 {
+	int countOfPoints = 0;
+	int countOfE = 0;
+	int startIndex = 0;
+	if (terminal[0] == '-')
+		startIndex = 1;
 
-	return false;
+	if (!isdigit(terminal[startIndex]))
+		return false;
+
+	int indexToContinue = -1;
+	startIndex++;
+
+	for (int i = startIndex; i < terminal.size() - 1; i++)
+	{
+		if (i == indexToContinue)
+			continue;
+
+		if (!isdigit(terminal[i]) && terminal[i] != '.' && terminal[i] != 'E')
+			return false;
+
+		if (terminal[i] == '.')
+			countOfPoints++;
+
+		if (terminal[i] == 'E')
+		{
+			countOfE++;
+			indexToContinue = i + 1;
+			if (indexToContinue < terminal.size())
+			{
+				if (terminal[indexToContinue] != '-' && terminal[indexToContinue] != '+')
+					return false;
+			}
+
+			if (indexToContinue == terminal.size() - 1)
+				return false;
+		}
+
+		if (countOfPoints > 1 || countOfE > 1)
+			return false;
+	}
+
+	return true;
 }
 
 

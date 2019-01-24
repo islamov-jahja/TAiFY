@@ -16,6 +16,8 @@ int main()
 	{
 		terminalAndValue = compiler.getNextTerminal();
 		terminal = terminalAndValue.terminal;
+		if (terminal.terminal.empty())
+			break;
 
 		if (terminalAndValue.value == 0)
 			cout << "Error: Key word: " << terminal.terminal << " line " << terminal.posY << " position " << terminal.posX << endl;
