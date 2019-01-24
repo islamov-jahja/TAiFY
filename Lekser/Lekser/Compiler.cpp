@@ -236,4 +236,10 @@ bool Compiler::isFloat(string terminal)
 	return true;
 }
 
+bool Compiler::isFloatE(string terminal)
+{
+
+	return false;
+}
+
 

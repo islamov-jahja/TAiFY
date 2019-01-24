@@ -14,6 +14,7 @@ private:
 	bool isInt8(string terminal);
 	bool isInt16(string terminal);
 	bool isFloat(string terminal);
+	bool isFloatE(string terminal);
 	ifstream fileWithCode;
 	int posX;
 	int posY;
