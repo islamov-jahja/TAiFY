@@ -10,39 +10,18 @@ int main()
 	TerminalAndValue terminalAndValue;
 	Terminal terminal;
 
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
-	terminalAndValue = compiler.getNextTerminal();
-	terminal = terminalAndValue.terminal;
-	cout << terminal.terminal << ' ' << terminalAndValue.value << ' ' << terminal.posY << ' ' << terminal.posX << endl;
+	terminal.terminal = "aba";
+
+	while (!terminal.terminal.empty())
+	{
+		terminalAndValue = compiler.getNextTerminal();
+		terminal = terminalAndValue.terminal;
+
+		if (terminalAndValue.value == 0)
+			cout << "Error: Key word: " << terminal.terminal << " line " << terminal.posY << " position " << terminal.posX << endl;
+		else
+			cout << "Key word: " << terminal.terminal << " id: " << terminalAndValue.value << " line " << terminal.posY << " position " << terminal.posX << endl;
+	}
 
 	system("pause");
     return 0;
