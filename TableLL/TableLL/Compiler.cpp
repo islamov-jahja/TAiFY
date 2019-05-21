@@ -129,6 +129,7 @@ void Compiler::FillQueueTerminalsForWrite()
 		for (int i = startIndex; i <= endIndex; i++)
 		{
 			StructForQueue newObject;
+			newObject.rule = '-1';
 			newObject.i = i;
 			newObject.j = 0;
 			newObject.terminal = _descriptionOfRules[i][0];
@@ -140,6 +141,7 @@ void Compiler::FillQueueTerminalsForWrite()
 			for (int j = 1; j < _descriptionOfRules[i].size(); j++)
 			{
 				StructForQueue newObject;
+				newObject.rule = _descriptionOfRules[i][0];;
 				newObject.i = i; 
 				newObject.j = j;
 				newObject.terminal = _descriptionOfRules[i][j];
@@ -153,7 +155,7 @@ void Compiler::FillQueueTerminalsForWrite()
 
 void Compiler::FillTable()
 {
-	string EndTerminals = GetEndTerminals();
+	string endTerminals = GetEndTerminals();
 
 	for (int i = 0; i < _queue.size(); i++)
 	{
@@ -216,6 +218,8 @@ void Compiler::FillTable()
 				}
 			}
 
+			table.push_back("0"); //END
+
 		}
 		else //подкомпонент
 		{
@@ -245,6 +249,12 @@ void Compiler::FillTable()
 						break;
 					}
 				}
+
+				if (endTerminals.find(elementOfQueue.terminal) != -1 && elementOfQueue.rule == 'S')
+				{
+					table.push_back("1"); //END
+				}else
+					table.push_back("0"); //END
 			}
 			else//просто символ
 			{
@@ -279,6 +289,13 @@ void Compiler::FillTable()
 						table.push_back("-1"); //GOTO
 					}
 				}
+
+				if (endTerminals.find(elementOfQueue.terminal) != -1 && elementOfQueue.rule == 'S')
+				{
+					table.push_back("1"); //END
+				}
+				else
+					table.push_back("0"); //END
 			}
 		}
 
@@ -401,7 +418,7 @@ void Compiler::ShowQueue()
 {
 	for each ( StructForQueue value in _queue)
 	{
-		cout << value.terminal << ' ' << value.i << ' ' << value.j << endl;
+		cout << value.terminal << ' ' << value.i << ' ' << value.j << ' ' << value.rule << endl;
 	}
 }
 

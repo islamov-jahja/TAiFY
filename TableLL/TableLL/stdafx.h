@@ -19,6 +19,7 @@ struct StructForQueue
 	char terminal;
 	int i;
 	int j;
+	char rule;
 };
 
 const char EPSILON = '*';
